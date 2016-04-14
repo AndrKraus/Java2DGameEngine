@@ -9,9 +9,13 @@ import org.lwjgl.opengl.PixelFormat;
 
 public class DisplayManager {
 	
-	static final int WIDTH = 1280;
-	static final int HEIGHT = 720;
+	static final int WIDTH = 1920;
+	static final int HEIGHT = 1080;
 	static final int FPS = 60;
+	static float RED = 0.0f;
+	static float GREEN = 0.0f;
+	static float BLUE = 0.0f;
+	static Renderer renderer = new Renderer();
 	
 	public static void createDisplay(){
 		ContextAttribs attribs = new ContextAttribs(3,2).withForwardCompatible(true).withProfileCore(true);
@@ -32,12 +36,20 @@ public class DisplayManager {
 	}
 	
 	public static void updateDisplay(){
+		
 		Display.sync(FPS);
+		renderer.render(RED, GREEN, BLUE);
 		Display.update();
 	}
 	
 	public static void closeDisplay(){
 		Display.destroy();
+	}
+	
+	public static void setBgColor(float r, float g, float b){
+		RED = r;
+		GREEN = g;
+		BLUE = b;
 	}
 
 	
